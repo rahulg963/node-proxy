@@ -1,11 +1,11 @@
 # node-proxy
 This repository contains a proxy application on node.js
 
-<!-- To install packages -->
+To install packages
 npm install
 
-<!-- To run application -->
+To run application
 npm start
 
-<!-- Port  -->
+Port
 3000

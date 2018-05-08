@@ -9,8 +9,7 @@ router.get('/swiggy/*', function (req, res, next) {
 	console.log("Request Received : ");
 	console.log(req);
 	var requestUrl = req.originalUrl.substring(7);
-	// var endPoint = swiggyEndpoint + requestUrl;
-	var endPoint = 'http://postb.in/HjA4cpga';
+	var endPoint = swiggyEndpoint + requestUrl;
 	var headers = req.headers;
 	delete(headers.host);
 	delete(headers.origin);
@@ -18,7 +17,8 @@ router.get('/swiggy/*', function (req, res, next) {
 	return request({
 		method: 'GET',
 		uri: endPoint,
-		headers: headers
+		headers: headers,
+		qs: req.query
 	}, function (err, resp, body) {
 		if (err) {
 			console.log(err.message);
@@ -26,7 +26,7 @@ router.get('/swiggy/*', function (req, res, next) {
 		} else {
 			console.log("Response Received : " + JSON.stringify(resp));
 		}
-		return res.send(resp);
+		return res.send(resp.body);
 	});
 	//   res.json({'statusCode' : 123, 'data' : "test", "statusMessage" : "test", "code": "test", "request_id" : "test", "errors" : null});
 });
@@ -35,17 +35,18 @@ router.post('/swiggy/*', function (req, res, next) {
 	console.log("Request Received : ");
 	console.log(req);
 	var requestUrl = req.originalUrl.substring(7);
-	// var endPoint = swiggyEndpoint + requestUrl;
-	var endPoint = 'http://postb.in/QxP8DfFd';
+	var endPoint = swiggyEndpoint + requestUrl;
 	var headers = req.headers;
 	delete(headers.host);
 	delete(headers.origin);
+	delete(headers['content-length']);
 	console.log("Request URL : " + endPoint);
 	return request({
 		method: 'POST',
 		uri: endPoint,
 		headers: headers,
 		body: req.body,
+		json: true
 	}, function (err, resp, body) {
 		if (err) {
 			console.log(err.message);
@@ -53,26 +54,28 @@ router.post('/swiggy/*', function (req, res, next) {
 		} else {
 			console.log("Response Received : " + JSON.stringify(resp));
 		}
-		return res.send(resp);
+		return res.send(resp.body);
 	});
 });
 
 
 router.put('/swiggy/*', function (req, res, next) {
 	console.log("Request Received : ");
+	console.log("Request Received : ");
 	console.log(req);
 	var requestUrl = req.originalUrl.substring(7);
-	// var endPoint = swiggyEndpoint + requestUrl;
-	var endPoint = 'http://postb.in/HjA4cpga';
+	var endPoint = swiggyEndpoint + requestUrl;
 	var headers = req.headers;
 	delete(headers.host);
 	delete(headers.origin);
+	delete(headers['content-length']);
 	console.log("Request URL : " + endPoint);
 	return request({
 		method: 'PUT',
 		uri: endPoint,
 		headers: headers,
-		body: req.body
+		body: req.body,
+		json: true
 	}, function (err, resp, body) {
 		if (err) {
 			console.log(err.message);
@@ -80,7 +83,7 @@ router.put('/swiggy/*', function (req, res, next) {
 		} else {
 			console.log("Response Received : " + JSON.stringify(resp));
 		}
-		return res.send(resp);
+		return res.send(resp.body);
 	});
 });
 
